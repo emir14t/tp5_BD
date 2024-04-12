@@ -93,8 +93,6 @@ export class DatabaseService {
       await client.query(dropRowQuery);
     }
     
-    console.log('stage 1');
-
     /* dereference foreign key in db before deleting */
     const updateQuery = `UPDATE ${DATABASE_NAME}.${TABLE_NAME} SET nomscientifiquecomsommer = NULL WHERE nomscientifiquecomsommer = '${birdID}';`;
     await client.query(updateQuery);
