@@ -1,0 +1,16 @@
+<nav class="navbar navbar-dark bg-dark">
+  <a class="navbar-brand title" href="/">INF3710 - TP5</a>
+  <div class="navbar-expand mr-auto">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" routerLink="/hotels">Hotels</a>
+      <a class="nav-item nav-link active" routerLink="/rooms">Rooms</a>
+      <a class="nav-item nav-link active" routerLink="/guests">Guests</a>
+    </div>
+  </div>
+</nav>
+
+<div class="home" *ngIf="route == ''">
+<p>PicaPica	Pie bavarde	Vulnérable	BrantaCanadensis</p>
+</div>
+
+<router-outlet></router-outlet>
