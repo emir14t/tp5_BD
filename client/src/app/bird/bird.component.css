@@ -1,0 +1,13 @@
+.bird {
+  width: fit-content;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.predators {
+  color: black;
+  background-color: white;
+  border-radius: 0;
+  height: 100%;
+}

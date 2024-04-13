@@ -1,0 +1,12 @@
+<div class="bird">
+  <input type="text" [(ngModel)]="sName" placeholder="Nom scientifique">
+  <input type="text" [(ngModel)]="name" placeholder="Nom commun">
+  <input type="text" [(ngModel)]="status" placeholder="Statut de l'espèce">
+  <select class="predators" [(ngModel)]="preyOf" placeholder="Prédateur">
+    <option value="">Sélectionner un prédateur</option>
+    <option *ngFor="let predator of predators" [value]="predator">{{ predator }}</option>
+  </select>
+  <button *ngIf="!createMode" (click)="delete()">Supprimer</button>
+  <button *ngIf="!createMode" (click)="update()">Sauvegarder</button>
+  <button *ngIf="createMode" (click)="create()">Créer</button>
+</div>
