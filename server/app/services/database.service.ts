@@ -67,8 +67,18 @@ export class DatabaseService {
         await client.query(alterQuery);
       }
 
+      /* In table drop constraint */
+      const alterQuery = `ALTER TABLE ${DATABASE_NAME}.${TABLE_NAME} DROP CONSTRAINT ${TABLE_NAME}_nomscientifiquecomsommer_fkey;`;
+      await client.query(alterQuery);
+      /* Update */
       const updateQueryText = `UPDATE ${DATABASE_NAME}.${TABLE_NAME} SET ${paramsToUpdate.join(", ")} WHERE nomscientifique = '${oldBirdID}';`;
       const updateRes = await client.query(updateQueryText);
+      /* In table add constraint */
+      const updateQuery2 = `UPDATE ${DATABASE_NAME}.${TABLE_NAME} SET nomscientifiquecomsommer = '${bird.nomScientifique}' WHERE nomscientifiquecomsommer = '${oldBirdID}';`
+      await client.query(updateQuery2);
+      const alterQuery2 = `ALTER TABLE ${DATABASE_NAME}.${TABLE_NAME} ADD CONSTRAINT ${TABLE_NAME}_nomscientifiquecomsommer_fkey FOREIGN KEY (nomscientifiquecomsommer) REFERENCES ${DATABASE_NAME}.${TABLE_NAME}(nomscientifique);`;
+      await client.query(alterQuery2);
+      
 
       for (const table of AFFECTED_TABLES) {
         const updateQuery = `UPDATE ${DATABASE_NAME}.${table} SET nomscientifique = '${bird.nomScientifique.length > 0 ? bird.nomScientifique : oldBirdID}' WHERE nomscientifique = '${oldBirdID}';`
