@@ -1,16 +1,21 @@
 <nav class="navbar navbar-dark bg-dark">
   <a class="navbar-brand title" href="/">INF3710 - TP5</a>
-  <div class="navbar-expand mr-auto">
-    <div class="navbar-nav">
-      <a class="nav-item nav-link active" routerLink="/hotels">Hotels</a>
-      <a class="nav-item nav-link active" routerLink="/rooms">Rooms</a>
-      <a class="nav-item nav-link active" routerLink="/guests">Guests</a>
-    </div>
-  </div>
 </nav>
 
-<div class="home" *ngIf="route == ''">
-<p>PicaPica	Pie bavarde	Vulnérable	BrantaCanadensis</p>
+<div class="home">
+  <div class="bird field">
+    <p class="sName">Nom scientifique</p>
+    <p class="sName">Nom commun</p>
+    <p class="sName">Statut</p>
+    <p class="sName">Prédateur</p>
+  </div>
+  <div *ngFor="let bird of birds" class="bird">
+      <app-bird [bird]="bird" [listOfPredators]="birds" [createMode]="false" (deleter)="deleteBird($event)" (updater)="updateBird($event)"></app-bird>
+  </div>
+</div>
+<div *ngIf="birds" class="add-bird">
+  <h2>Ajouter un oiseau</h2>
+  <app-bird [bird]="newBird" [listOfPredators]="birds" [createMode]="true" (creater)="addBird($event)"></app-bird>
 </div>
 
 <router-outlet></router-outlet>

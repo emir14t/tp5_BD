@@ -27,20 +27,31 @@ export class CommunicationService {
   }
 
   public insertBird(bird: Bird): Observable<number> {
+    const birdOBJ = {
+      "nomScientifique": bird.nomScientifique,
+      "nomCommun": bird.nomCommun,
+      "statusEspece": bird.statusEspece,
+    }
+    let requestOBJ;
+    if (bird.predateur) {
+      requestOBJ = { ...birdOBJ, "predateur": bird.predateur  };
+    } else {
+      requestOBJ = { ...birdOBJ };
+    }
     return this.http
-      .post<number>(this.BASE_URL + "/oiseau", bird)
+      .post<number>(this.BASE_URL + "/oiseau", requestOBJ)
       .pipe(catchError(this.handleError<number>("insertBird")));
   }
 
   public updateBird(bird: Bird, oldBirdID: string): Observable<number> {
     return this.http
-      .put<number>(this.BASE_URL + `/oiseau/update/${oldBirdID}`, bird)
+      .patch<number>(this.BASE_URL + `/oiseau/update/${oldBirdID}`, bird)
       .pipe(catchError(this.handleError<number>("updateBird")));
   }
 
   public deleteBird(birdID: string): Observable<number> {
     return this.http
-      .post<number>(this.BASE_URL + "/oiseau/" + birdID, {})
+      .delete<number>(this.BASE_URL + "/oiseau/" + birdID, {})
       .pipe(catchError(this.handleError<number>("deleteBird")));
   }
 

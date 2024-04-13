@@ -6,10 +6,12 @@ import { BrowserModule } from "@angular/platform-browser";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { CommunicationService } from "./communication.service";
+import { BirdComponent } from './bird/bird.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    BirdComponent,
   ],
   imports: [
     CommonModule,
